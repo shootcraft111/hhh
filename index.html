@@ -1,184 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><text-color: white>Terps Only</title>
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        margin-top: 50px;
-        background-color: #1C1B1A;
-      }
-      .phone-card {
-        background-color: grey;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        text-align: center;
-        transition: transform 0.2s ease-in-out;
-      }
-      .phone-card img {
-        max-width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 10px;
-        margin-bottom: 15px;
-      }
-      .phone-card:hover {
-        transform: scale(1.05);
-      }
-      .cart-summary {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 20px;
-      }
-      .cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-      }
-      .cart-item button {
-        background-color: red;
-        color: white;
-        border: none;
-        padding: 5px 10px;
-        border-radius: 5px;
-      }
-      .cart-item button:hover {
-        background-color: darkred;
-      }
-      .total-price {
-        font-weight: bold;
-        margin-top: 20px;
-        font-size: 1.2em;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="text-center mb-4">Terps Only Shop</h1>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terps Only</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      margin-top: 50px;
+      background-color: #1C1B1A;
+      color: white;
+    }
+    .phone-card {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: transform 0.2s ease-in-out;
+    }
+    .phone-card img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .phone-card:hover {
+      transform: scale(1.05);
+    }
+    .price-details {
+      font-size: 14px;
+      margin-top: 10px;
+      color: #ccc;
+    }
+    .btn-order {
+      margin-top: 15px;
+    }
+    .admin-link {
+      position: fixed;
+      top: 10px;
+      right: 20px;
+      background: #ffc107;
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .admin-link:hover {
+      background: #e0a800;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <a href="admin.html" class="admin-link">Admin</a>
 
-      <!-- Products Section -->
-      <div id="product-list" class="row"></div>
+  <div class="container">
+    <h1 class="text-center mb-4">Terps Only Shop</h1>
+    <div id="product-list" class="row"></div>
+  </div>
 
-      <!-- Cart Section -->
-      <h2 class="text-center mt-5">Your Cart</h2>
-      <div id="cart" class="cart-summary"></div>
-    </div>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    const phones = [
+      {
+        name: "iPhone 14",
+        price: 999,
+        image: "./iphone.jpg",
+        quantitePrix: "1 = 999€, 5+ = 950€, 10+ = 900€"
+      },
+      {
+        name: "Samsung Galaxy S23",
+        price: 899,
+        image: "./samsung.jpg",
+        quantitePrix: "1 = 899€, 5+ = 850€, 10+ = 800€"
+      },
+      {
+        name: "Google Pixel 8",
+        price: 799,
+        image: "./pixel.jpg",
+        quantitePrix: "1 = 799€, 5+ = 760€, 10+ = 720€"
+      },
+      {
+        name: "Nokia",
+        price: 749,
+        image: "./nokia.jpg",
+        quantitePrix: "1 = 749€, 5+ = 700€, 10+ = 650€"
+      },
+      {
+        name: "Xiaomi Mi 13",
+        price: 699,
+        image: "./xiaomi.jpg",
+        quantitePrix: "1 = 699€, 5+ = 660€, 10+ = 620€"
+      },
+    ];
 
-    <!-- JavaScript Section -->
-    <script>
-      // Array of phones available for purchase with image URLs
-      const phones = [
-        {
-          name: "iPhone 14",
-          price: 999,
-          image: "./iphone.jpg",
-        },
-        {
-          name: "Samsung Galaxy S23",
-          price: 899,
-          image: "./samsung.jpg",
-        },
-        {
-          name: "Google Pixel 8",
-          price: 799,
-          image: "./pixel.jpg",
-        },
-        {
-          name: "Nokia",
-          price: 749,
-          image: "./nokia.jpg",
-        },
-        {
-          name: "Xiaomi Mi 13",
-          price: 699,
-          image: "./xiaomi.jpg",
-        },
-      ];
+    function displayPhones() {
+      const productList = document.getElementById("product-list");
+      productList.innerHTML = "";
 
-      // Cart array to store selected phones
-      let cart = [];
-
-      // Function to display the list of phones
-      function displayPhones() {
-        const productList = document.getElementById("product-list");
-        productList.innerHTML = ""; // Clear existing content
-
-        phones.forEach((phone, index) => {
-          productList.innerHTML += `
-        <div class="col-md-4">
-          <div class="phone-card">
-            <img src="${phone.image}" alt="${phone.name}">
-            <h5>${phone.name}</h5>
-            <p>Price: $${phone.price}</p>
-            <button class="btn btn-primary" onclick="addToCart(${index})">Add to Cart</button>
+      phones.forEach((phone) => {
+        productList.innerHTML += `
+          <div class="col-md-4">
+            <div class="phone-card">
+              <img src="${phone.image}" alt="${phone.name}">
+              <h5>${phone.name}</h5>
+              <p>Prix unitaire : ${phone.price}€</p>
+              <div class="price-details">Prix par quantité : ${phone.quantitePrix}</div>
+              <a href="https://t.me/rolexbordeaux" class="btn btn-success btn-order" target="_blank">Commander</a>
+            </div>
           </div>
-        </div>
-      `;
-        });
-      }
+        `;
+      });
+    }
 
-      // Function to add a phone to the cart
-      function addToCart(index) {
-        const selectedPhone = phones[index];
-        cart.push(selectedPhone); // Add the selected phone to the cart
-        displayCart();
-      }
-
-      // Function to remove a phone from the cart
-      function removeFromCart(index) {
-        cart.splice(index, 1); // Remove the selected phone from the cart
-        displayCart();
-      }
-
-      // Function to display the cart and update the total price
-      function displayCart() {
-        const cartDiv = document.getElementById("cart");
-        cartDiv.innerHTML = ""; // Clear existing cart content
-
-        if (cart.length === 0) {
-          cartDiv.innerHTML = "<p>Your cart is empty</p>";
-          return;
-        }
-
-        // Display each item in the cart
-        cart.forEach((item, index) => {
-          cartDiv.innerHTML += `
-        <div class="cart-item">
-          <span>${item.name} - $${item.price}</span>
-          <button onclick="removeFromCart(${index})">Remove</button>
-        </div>
-      `;
-        });
-
-        // Calculate the total price using reduce
-        const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-
-        // Display the total price
-        cartDiv.innerHTML += `
-      <div class="total-price">
-        Total Price: $${totalPrice}
-      </div>
-    `;
-      }
-
-      // Initial display of phones
-      displayPhones();
-    </script>
-  </body>
+    displayPhones();
+  </script>
+</body>
 </html>
